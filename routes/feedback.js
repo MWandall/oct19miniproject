@@ -1,6 +1,6 @@
 const fb = require('express').Router();
-const { v4: uuidv4 } = require('uuid');
-const { readAndAppend, readFromFile } = require('../helpers/fsUtils');
+const { readAndAppend } = require('../helpers/fsUtils');
+const uuid = require('../helpers/uuid');
 
 // GET Route for retrieving all the feedback
 fb.get('/', (req, res) =>
@@ -19,7 +19,7 @@ fb.post('/', (req, res) => {
       email,
       feedbackType,
       feedback,
-      feedback_id: uuidv4(),
+      feedback_id: uuid(),
     };
 
     readAndAppend(newFeedback, './db/feedback.json');
